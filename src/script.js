@@ -1,32 +1,18 @@
-/* =====================================================================
-   Portfólio - Gianluca Antoniacci
-   - Tema claro/escuro (salvo no navegador)
-   - Idiomas: português, inglês e espanhol (salvo no navegador)
-   - Menu mobile e destaque do link ativo na navegação
-
-   Este arquivo é carregado no <head> sem "defer": o tema é aplicado
-   imediatamente (evita o "piscar" de cores) e o resto espera o DOM.
-   ===================================================================== */
 (function () {
   'use strict';
 
   const STORAGE_KEYS = { theme: 'portfolio-theme', lang: 'portfolio-lang' };
   const root = document.documentElement;
 
-  // localStorage pode falhar (aba anônima, bloqueio de cookies)
   function readStorage(key) {
     try { return localStorage.getItem(key); } catch (e) { return null; }
   }
   function writeStorage(key, value) {
-    try { localStorage.setItem(key, value); } catch (e) { /* ignora */ }
+    try { localStorage.setItem(key, value); } catch (e) {}
   }
 
-  /* ---------- Tema: aplicado antes da renderização ---------- */
   root.dataset.theme = readStorage(STORAGE_KEYS.theme) === 'light' ? 'light' : 'dark';
 
-  /* ---------- Traduções ----------
-     Para editar textos (inclusive dos cards de projeto), altere as
-     chaves abaixo nos três idiomas. Chaves com "<br>" são HTML. */
   const translations = {
     pt: {
       pageTitle: 'Gianluca Antoniacci | Portfólio',
@@ -54,17 +40,14 @@
       qrAlt: 'QR Code para enviar e-mail',
       projectsTitle: 'Meus Projetos :',
       viewProject: 'Ver projeto',
-      // PROJETO 1: src/pages/bootstrap.html
       p1Title: 'Grão Nobre',
       p1Desc: 'Landing page de uma marca fictícia de cafés especiais, feita com Bootstrap 5: carrossel de depoimentos, FAQ em acordeão e pedido em modal.',
       p1Alt: 'Página inicial do projeto Grão Nobre',
       p1Link: 'Ver o projeto Grão Nobre (abre em nova aba)',
-      // PROJETO 2: src/pages/tailwind1.html
       p2Title: 'NovaCore',
       p2Desc: 'Site institucional de uma empresa de tecnologia, feito com Tailwind CSS: serviços, sobre nós, depoimentos e formulário de contato.',
       p2Alt: 'Página inicial do projeto NovaCore',
       p2Link: 'Ver o projeto NovaCore (abre em nova aba)',
-      // PROJETO 3: src/pages/tailwind2.html
       p3Title: 'Fio & Prensa',
       p3Desc: 'Site de um ateliê de encadernação artesanal, feito com Tailwind CSS: etapas do ofício, peças recentes e informações para visita.',
       p3Alt: 'Página inicial do projeto Fio & Prensa',
@@ -175,7 +158,6 @@
     return key in dict ? dict[key] : translations.pt[key];
   }
 
-  // Idioma inicial: escolha salva > idioma do navegador > português
   function detectLang() {
     const saved = readStorage(STORAGE_KEYS.lang);
     if (saved && translations[saved]) return saved;
@@ -190,23 +172,19 @@
     setupLanguage(menu);
   });
 
-  /* ---------- Idioma ---------- */
   function applyLanguage(lang, menu) {
     currentLang = translations[lang] ? lang : 'pt';
     root.lang = HTML_LANG[currentLang];
     document.title = t('pageTitle');
 
-    // Texto simples
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       el.textContent = t(el.dataset.i18n);
     });
 
-    // Texto com quebra de linha (conteúdo vem apenas do dicionário acima)
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
       el.innerHTML = t(el.dataset.i18nHtml);
     });
 
-    // Atributos: data-i18n-attr="aria-label:chave;alt:outraChave"
     document.querySelectorAll('[data-i18n-attr]').forEach(function (el) {
       el.dataset.i18nAttr.split(';').forEach(function (pair) {
         const parts = pair.split(':');
@@ -214,7 +192,6 @@
       });
     });
 
-    // Estado dos botões de idioma
     document.querySelectorAll('[data-lang]').forEach(function (btn) {
       btn.setAttribute('aria-pressed', String(btn.dataset.lang === currentLang));
     });
@@ -233,7 +210,6 @@
     });
   }
 
-  /* ---------- Tema ---------- */
   function setupTheme() {
     const toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
@@ -251,7 +227,6 @@
     sync();
   }
 
-  /* ---------- Menu mobile ---------- */
   function setupMenu() {
     const btn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu-mobile');
@@ -286,7 +261,6 @@
     return { refreshLabel: refreshLabel };
   }
 
-  /* ---------- Link ativo conforme a seção visível ---------- */
   function setupActiveNav() {
     const links = document.querySelectorAll('[data-nav]');
 
@@ -310,7 +284,6 @@
       });
     }
 
-    // Garante "Contato" ativo ao chegar ao fim da página
     window.addEventListener('scroll', function () {
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
         setActive('contato');
