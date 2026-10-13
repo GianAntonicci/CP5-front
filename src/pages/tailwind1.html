@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaCore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'purple-hero': '#3d2a5c',
+            'purple-section': '#2e2540',
+            'bg-dark': '#141217',
+            card: '#2f2840',
+            accent: '#a259d9',
+            'accent-light': '#b97ce8',
+            muted: '#c4bfd0',
+            borda: '#7a4fb0',
+            footer: '#1b1820',
+            'footer-line': '#2c2834',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+          screens: {
+            tablet: '601px',
+            desktop: '901px',
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      h1, h2, h3, h4 {
+        @apply font-display;
+      }
+    }
+  </style>
+</head>
+<body class="bg-bg-dark font-sans leading-[1.6] text-white">
+
+  <!-- HERO -->
+  <header class="bg-purple-hero pb-[100px]">
+    <nav class="mx-auto flex w-[90%] max-w-[1100px] flex-col items-center justify-between gap-4 py-6 tablet:flex-row tablet:gap-0">
+      <a href="#" class="flex items-center gap-2 font-display text-[1.2rem] font-semibold">
+        <i class="bx bx-circle text-[2.2rem] text-accent"></i>
+        <span>NovaCore</span>
+      </a>
+      <ul class="flex list-none gap-4 tablet:gap-7">
+        <li><a href="#servicos" class="text-[0.85rem] font-medium transition-colors duration-300 hover:text-accent-light">Soluções</a></li>
+        <li><a href="#sobre" class="text-[0.85rem] font-medium transition-colors duration-300 hover:text-accent-light">Sobre nós</a></li>
+        <li><a href="#depoimentos" class="text-[0.85rem] font-medium transition-colors duration-300 hover:text-accent-light">Clientes</a></li>
+        <li><a href="#contato" class="text-[0.85rem] font-medium transition-colors duration-300 hover:text-accent-light">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="mx-auto w-[90%] max-w-[1100px] pt-[70px] text-center">
+      <h1 class="mx-auto mb-6 max-w-[650px] text-[2rem] font-bold leading-[1.2] tablet:text-5xl">Tecnologia para acelerar ideias,<br>equipes e negócios</h1>
+      <p class="mx-auto mb-7 max-w-[560px] text-[0.95rem] text-muted">Soluções digitais sob medida para empresas que querem inovar com estratégia, clareza e eficiência.</p>
+      <a href="#contato" class="inline-block rounded-md bg-accent px-7 py-3.5 text-xs font-semibold uppercase text-white transition-colors duration-300 hover:bg-accent-light">Quero conhecer</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="bg-bg-dark py-[90px] text-center">
+      <div class="mx-auto w-[90%] max-w-[1100px]">
+        <span class="mb-2 block text-[0.7rem] font-semibold uppercase tracking-[3px] text-accent">Nosso trabalho</span>
+        <h2 class="mb-5 text-[1.8rem] font-bold tablet:text-[2.2rem]">Serviços</h2>
+        <p class="mx-auto mb-[50px] max-w-[640px] text-[0.95rem] text-muted">A NovaCore combina estratégia, design e desenvolvimento para criar soluções digitais que simplificam processos e fazem negócios evoluírem.</p>
+
+        <div class="grid grid-cols-1 gap-6 text-left tablet:grid-cols-2 desktop:grid-cols-3">
+          <article class="rounded-xl bg-card px-6 py-[30px] transition-transform duration-300 hover:-translate-y-[5px]">
+            <h3 class="mb-3 text-[0.95rem] font-semibold uppercase">Desenvolvimento web</h3>
+            <p class="text-[0.9rem] text-muted">Sites, portais e plataformas modernas com foco em performance, usabilidade e escalabilidade.</p>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px] transition-transform duration-300 hover:-translate-y-[5px]">
+            <h3 class="mb-3 text-[0.95rem] font-semibold uppercase">Aplicações mobile</h3>
+            <p class="text-[0.9rem] text-muted">Experiências mobile intuitivas para aproximar empresas e usuários em diferentes jornadas digitais.</p>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px] transition-transform duration-300 hover:-translate-y-[5px]">
+            <h3 class="mb-3 text-[0.95rem] font-semibold uppercase">Automação de processos</h3>
+            <p class="text-[0.9rem] text-muted">Fluxos mais eficientes para reduzir tarefas manuais e melhorar a produtividade das equipes.</p>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px] transition-transform duration-300 hover:-translate-y-[5px]">
+            <h3 class="mb-3 text-[0.95rem] font-semibold uppercase">Integrações de sistemas</h3>
+            <p class="text-[0.9rem] text-muted">Conexão entre ferramentas, APIs e plataformas para centralizar operações e informações.</p>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px] transition-transform duration-300 hover:-translate-y-[5px]">
+            <h3 class="mb-3 text-[0.95rem] font-semibold uppercase">Dados e analytics</h3>
+            <p class="text-[0.9rem] text-muted">Dashboards e soluções analíticas para transformar dados em decisões mais inteligentes.</p>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px] transition-transform duration-300 hover:-translate-y-[5px]">
+            <h3 class="mb-3 text-[0.95rem] font-semibold uppercase">UX e interface</h3>
+            <p class="text-[0.9rem] text-muted">Interfaces claras, funcionais e atrativas para melhorar a experiência dos produtos digitais.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE NÓS -->
+    <section id="sobre" class="bg-purple-section py-[90px] text-center">
+      <div class="mx-auto w-[90%] max-w-[1100px]">
+        <span class="mb-2 block text-[0.7rem] font-semibold uppercase tracking-[3px] text-accent">NovaCore</span>
+        <h2 class="mb-5 text-[1.8rem] font-bold tablet:text-[2.2rem]">Sobre nós</h2>
+
+        <div class="mt-[30px] grid grid-cols-1 items-center gap-[50px] text-left desktop:grid-cols-2">
+          <div>
+            <h3 class="mb-[18px] text-[1.15rem] font-semibold uppercase text-accent-light">Atuação em diferentes mercados e soluções digitais</h3>
+            <p class="mb-[18px] text-[0.9rem] text-muted">Somos uma empresa de tecnologia focada em desenvolver soluções digitais para negócios que buscam inovação com consistência. Atuamos lado a lado com nossos clientes na criação de produtos, melhoria de processos e evolução tecnológica.</p>
+            <p class="mb-[18px] text-[0.9rem] text-muted">Nossa trajetória é marcada pela colaboração entre estratégia, design e desenvolvimento. Com uma equipe multidisciplinar, entregamos soluções personalizadas para diferentes segmentos e desafios.</p>
+          </div>
+
+          <div class="relative h-[280px] overflow-hidden rounded-[14px] bg-gradient-to-br from-[#a259d9] via-[#4a2f6e] via-55% to-[#1e1828]">
+            <span class="absolute left-[50px] top-[50px] h-[60px] w-[60px] rounded-full bg-white/[.18]"></span>
+            <span class="absolute left-[180px] top-[50px] h-[75px] w-[75px] rounded-full bg-white/[.18]"></span>
+            <span class="absolute left-[315px] top-[50px] h-[90px] w-[90px] rounded-full bg-white/[.18]"></span>
+            <span class="absolute left-[115px] top-[130px] h-[70px] w-[70px] rounded-full bg-white/[.18]"></span>
+            <span class="absolute left-[250px] top-[125px] h-[80px] w-[80px] rounded-full bg-white/[.18]"></span>
+            <span class="absolute left-[385px] top-[125px] hidden h-[95px] w-[95px] rounded-full bg-white/[.18] tablet:block"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="bg-bg-dark py-[90px] text-center">
+      <div class="mx-auto w-[90%] max-w-[1100px]">
+        <span class="mb-2 block text-[0.7rem] font-semibold uppercase tracking-[3px] text-accent">Nossos clientes</span>
+        <h2 class="mb-5 text-[1.8rem] font-bold tablet:text-[2.2rem]">Depoimentos</h2>
+
+        <div class="mt-[30px] grid grid-cols-1 gap-6 tablet:grid-cols-2 desktop:grid-cols-3">
+          <article class="rounded-xl bg-card px-6 py-[30px]">
+            <div class="mx-auto mb-[18px] h-[50px] w-[50px] rounded-full bg-accent"></div>
+            <p class="mb-4 text-[0.85rem] text-muted">"A parceria trouxe mais clareza para nossos processos e acelerou a entrega de um produto que estava parado há meses."</p>
+            <strong class="text-[0.85rem]">Ana Beatriz Silva</strong>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px]">
+            <div class="mx-auto mb-[18px] h-[50px] w-[50px] rounded-full bg-accent"></div>
+            <p class="mb-4 text-[0.85rem] text-muted">"O time entendeu nosso negócio rapidamente e transformou necessidades complexas em uma experiência simples para o usuário."</p>
+            <strong class="text-[0.85rem]">Carlos Eduardo Lima</strong>
+          </article>
+          <article class="rounded-xl bg-card px-6 py-[30px]">
+            <div class="mx-auto mb-[18px] h-[50px] w-[50px] rounded-full bg-accent"></div>
+            <p class="mb-4 text-[0.85rem] text-muted">"Conseguimos reduzir retrabalho e melhorar nossa operação sem perder qualidade na experiência digital."</p>
+            <strong class="text-[0.85rem]">Fernanda Rocha</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="bg-bg-dark pb-[90px] pt-5 text-center">
+      <div class="mx-auto w-[90%] max-w-[1100px]">
+        <span class="mb-2 block text-[0.7rem] font-semibold uppercase tracking-[3px] text-accent">Fale com a gente</span>
+        <h2 class="mb-5 text-[1.8rem] font-bold tablet:text-[2.2rem]">Contato</h2>
+
+        <div class="mt-[30px] grid grid-cols-1 items-center gap-10 text-left desktop:grid-cols-2">
+          <div class="relative h-[320px] overflow-hidden rounded-[14px] bg-gradient-to-b from-[#3a2b52] via-[#4b3268] via-60% to-[#a259d9]">
+            <span class="absolute left-[25px] top-[35px] h-10 w-10 rounded-full border-[1.5px] border-white/30"></span>
+            <span class="absolute left-[160px] top-[35px] h-[70px] w-[70px] rounded-full border-[1.5px] border-white/30"></span>
+            <span class="absolute left-[300px] top-[35px] hidden h-[100px] w-[100px] rounded-full border-[1.5px] border-white/30 tablet:block"></span>
+            <span class="absolute left-[70px] top-[120px] h-[50px] w-[50px] rounded-full border-[1.5px] border-white/30"></span>
+            <span class="absolute left-[210px] top-[115px] h-[80px] w-[80px] rounded-full border-[1.5px] border-white/30"></span>
+            <span class="absolute left-[120px] top-[200px] h-[60px] w-[60px] rounded-full border-[1.5px] border-white/30"></span>
+          </div>
+
+          <form class="flex flex-col rounded-[14px] border border-borda bg-card p-[30px]">
+            <h3 class="mb-1.5 text-[1.2rem] font-bold text-accent-light">Conheça melhor nossas soluções</h3>
+            <p class="mb-4 text-[0.8rem] text-muted">Preencha o formulário para entrar em contato com nossa equipe.</p>
+
+            <label for="nome" class="mb-1.5 text-[0.8rem] font-semibold">Nome</label>
+            <input type="text" id="nome" name="nome" class="mb-4 rounded border border-borda bg-bg-dark p-2.5 text-white focus:border-accent-light focus:outline-none">
+
+            <label for="email" class="mb-1.5 text-[0.8rem] font-semibold">E-mail</label>
+            <input type="email" id="email" name="email" class="mb-4 rounded border border-borda bg-bg-dark p-2.5 text-white focus:border-accent-light focus:outline-none">
+
+            <label for="empresa" class="mb-1.5 text-[0.8rem] font-semibold">Empresa</label>
+            <input type="text" id="empresa" name="empresa" class="mb-4 rounded border border-borda bg-bg-dark p-2.5 text-white focus:border-accent-light focus:outline-none">
+
+            <label for="mensagem" class="mb-1.5 text-[0.8rem] font-semibold">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="4" class="mb-4 resize-y rounded border border-borda bg-bg-dark p-2.5 text-white focus:border-accent-light focus:outline-none"></textarea>
+
+            <button type="submit" class="self-start rounded-md bg-accent px-7 py-3.5 text-xs font-semibold uppercase text-white transition-colors duration-300 hover:bg-accent-light">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-footer pb-[30px] pt-[50px] text-center">
+    <div class="mx-auto w-[90%] max-w-[1100px]">
+      <a href="#" class="mb-[30px] inline-flex flex-col items-center font-display text-[1.2rem] font-semibold">
+        <i class="bx bx-circle text-[2.6rem] text-accent"></i>
+        <span>NovaCore</span>
+      </a>
+
+      <div class="grid grid-cols-1 gap-[30px] border-b border-footer-line pb-[30px] tablet:grid-cols-3">
+        <div class="flex flex-col gap-2">
+          <h4 class="mb-1 text-xs font-bold uppercase tracking-[3px] text-accent">A empresa</h4>
+          <a href="#" class="text-[0.8rem] text-muted hover:text-accent-light">Nossa história</a>
+          <a href="#servicos" class="text-[0.8rem] text-muted hover:text-accent-light">Soluções</a>
+          <a href="#" class="text-[0.8rem] text-muted hover:text-accent-light">Trabalhe conosco</a>
+          <a href="#" class="text-[0.8rem] text-muted hover:text-accent-light">Política de privacidade</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="mb-1 text-xs font-bold uppercase tracking-[3px] text-accent">Contato</h4>
+          <a href="tel:+551140000000" class="text-[0.8rem] text-muted hover:text-accent-light">+55 11 4000-0000</a>
+          <a href="mailto:contato@novacore.com" class="text-[0.8rem] text-muted hover:text-accent-light">contato@novacore.com</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h4 class="mb-1 text-xs font-bold uppercase tracking-[3px] text-accent">Onde estamos</h4>
+          <span class="text-[0.8rem] text-muted">Av. Paulista, 1000</span>
+          <span class="text-[0.8rem] text-muted">Bela Vista — São Paulo, SP</span>
+          <span class="text-[0.8rem] text-muted">CEP 01310-100</span>
+        </div>
+      </div>
+
+      <p class="pt-6 text-xs text-muted">&copy; 2026 NovaCore. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

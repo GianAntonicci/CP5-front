@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gianluca Antonicci | Portfólio</title>
+  <meta name="description" data-i18n-attr="content:metaDesc" content="Portfólio de Gianluca Antoniacci, estudante de Engenharia de Software." />
+
+  <!-- Fontes: Anton (título gigante), Saira Condensed (títulos de seção), Montserrat (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Saira+Condensed:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            /* Cores que mudam com o tema (definidas em :root mais abaixo) */
+            page: 'rgb(var(--page) / <alpha-value>)',         /* fundo da página */
+            paper: 'rgb(var(--paper) / <alpha-value>)',       /* cartões claros */
+            contrast: 'rgb(var(--contrast) / <alpha-value>)', /* detalhes direto sobre o fundo */
+            /* Cores fixas */
+            ink: '#0B0B0B',
+            bone: '#F5F3EF',
+            ash: '#B8B4AD',
+            stone: '#55524D',
+            graphite: '#1F1F1F'
+          },
+          fontFamily: {
+            display: ['Anton', 'Impact', 'sans-serif'],
+            head: ['"Saira Condensed"', 'Arial Narrow', 'sans-serif'],
+            body: ['Montserrat', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Tema, idioma e menu. Carregado aqui para aplicar o tema antes da renderização. -->
+  <script src="src/script.js"></script>
+
+  <style>
+    /* ===== Variáveis de tema ===== */
+    :root {
+      --page: 11 11 11;
+      --paper: 232 229 224;
+      --contrast: 232 229 224;
+      color-scheme: dark;
+    }
+    :root[data-theme="light"] {
+      --page: 214 210 203;
+      --paper: 250 249 246;
+      --contrast: 11 11 11;
+      color-scheme: light;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* Foco visível em duas cores: funciona sobre fundo claro e escuro */
+    :focus-visible {
+      outline: 3px solid rgb(var(--paper));
+      outline-offset: 2px;
+      box-shadow: 0 0 0 2px #0B0B0B;
+    }
+
+    /* Palavra gigante vazada no fundo da página */
+    .bg-word {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(6rem, 24vw, 17rem);
+      line-height: .82;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 1px rgb(var(--contrast) / .08);
+    }
+
+    /* Título "PORT FÓLIO" com efeito de extrusão, como na referência */
+    .hero-word {
+      color: #E8E5E0;
+      -webkit-text-stroke: 1.5px #0B0B0B;
+      text-shadow: 1px 1px 0 #6b6862, 2px 2px 0 #6b6862, 3px 3px 0 #4a4844,
+                   4px 4px 0 #3a3835, 6px 6px 0 #0B0B0B;
+    }
+
+    /* Código de barras decorativo */
+    .barcode {
+      background: repeating-linear-gradient(90deg,
+        #0B0B0B 0 2px, transparent 2px 4px, #0B0B0B 4px 5px, transparent 5px 8px,
+        #0B0B0B 8px 11px, transparent 11px 12px, #0B0B0B 12px 13px, transparent 13px 17px);
+    }
+
+    /* Recortes laterais estilo "ticket" (usam a cor do fundo da página) */
+    .notch { position: relative; }
+    .notch::before,
+    .notch::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background: rgb(var(--page));
+      transform: translateY(-50%);
+      transition: background-color .3s;
+    }
+    .notch::before { left: -11px; }
+    .notch::after { right: -11px; }
+
+    /* Estado ativo e hover dos links do menu */
+    .nav-link[aria-current="true"] { background: #0B0B0B; color: rgb(var(--paper)); }
+    .nav-link:hover:not([aria-current="true"]) { background: rgba(11, 11, 11, .08); }
+
+    /* Botões de idioma */
+    .lang-btn[aria-pressed="true"] { background: #0B0B0B; color: rgb(var(--paper)); }
+    .lang-btn:hover:not([aria-pressed="true"]) { background: rgba(11, 11, 11, .08); }
+
+    /* Chave de tema: bolinha à direita = escuro, à esquerda = claro */
+    .theme-switch .knob { transition: transform .3s ease; }
+    .theme-switch[aria-checked="true"] .knob { transform: translateX(calc(6rem - 5px - .75rem - 2rem)); }
+    [data-theme="dark"] .icon-sun,
+    [data-theme="light"] .icon-moon { display: none; }
+
+    /* Sombra dos cards de projeto no hover */
+    .card-hover:hover { box-shadow: 0 12px 30px -12px rgb(var(--contrast) / .35); }
+
+    /* Texto vertical do título "Meus Projetos" no desktop */
+    @media (min-width: 768px) {
+      .vertical-title { writing-mode: vertical-rl; transform: rotate(180deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-page font-body text-paper antialiased transition-colors duration-300">
+
+  <!-- ============ FUNDO DECORATIVO ============ -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 select-none overflow-hidden">
+    <div class="-ml-4 flex flex-col">
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+      <span class="bg-word" data-i18n="bgWord">Portfólio</span>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:py-16">
+
+    <!-- ============ CABEÇALHO / HERO ============ -->
+    <header id="inicio" class="relative scroll-mt-6">
+      <div class="rounded-[2rem] bg-paper p-5 text-ink transition-colors duration-300 sm:p-8">
+        <div class="grid gap-8 md:grid-cols-12">
+
+          <!-- Coluna de texto -->
+          <div class="flex flex-col md:col-span-7">
+
+            <!-- Navegação -->
+            <nav aria-label="Navegação principal" data-i18n-attr="aria-label:navLabel" class="flex items-center gap-3">
+              <a href="#inicio" aria-label="Ir para o início" data-i18n-attr="aria-label:homeLabel"
+                 class="grid h-12 w-12 shrink-0 place-items-center rounded-full border-[3px] border-ink transition-colors duration-200 hover:bg-ink hover:text-paper">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor">
+                  <path d="M12 3 2 11.5h3V21h5.5v-6h3v6H19v-9.5h3L12 3Z" />
+                </svg>
+              </a>
+
+              <ul class="hidden flex-wrap items-center gap-1 text-sm font-extrabold uppercase tracking-wide sm:flex md:text-xs lg:text-sm">
+                <li><a href="#inicio" data-nav aria-current="true" data-i18n="navHome" class="nav-link rounded-full px-4 py-2 transition-colors duration-200 md:px-2.5 lg:px-4">Início</a></li>
+                <li><a href="#habilidades" data-nav data-i18n="navSkills" class="nav-link rounded-full px-4 py-2 transition-colors duration-200 md:px-2.5 lg:px-4">Habilidades</a></li>
+                <li><a href="#projetos" data-nav data-i18n="navProjects" class="nav-link rounded-full px-4 py-2 transition-colors duration-200 md:px-2.5 lg:px-4">Projetos</a></li>
+                <li><a href="#contato" data-nav data-i18n="navContact" class="nav-link rounded-full px-4 py-2 transition-colors duration-200 md:px-2.5 lg:px-4">Contato</a></li>
+              </ul>
+
+              <!-- Botão do menu mobile -->
+              <button id="menu-btn" type="button" aria-controls="menu-mobile" aria-expanded="false" aria-label="Abrir menu"
+                      class="ml-auto grid h-12 w-12 place-items-center rounded-full bg-ink text-paper transition-transform duration-200 hover:scale-105 sm:hidden">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <path id="menu-icon" d="M4 7h16M4 12h16M4 17h10" />
+                </svg>
+              </button>
+            </nav>
+
+            <!-- Menu mobile -->
+            <ul id="menu-mobile" class="mt-4 hidden gap-1 rounded-2xl border-2 border-ink p-2 text-sm font-extrabold uppercase tracking-wide sm:hidden">
+              <li><a href="#inicio" data-nav aria-current="true" data-i18n="navHome" class="nav-link block rounded-full px-4 py-2.5">Início</a></li>
+              <li><a href="#habilidades" data-nav data-i18n="navSkills" class="nav-link block rounded-full px-4 py-2.5">Habilidades</a></li>
+              <li><a href="#projetos" data-nav data-i18n="navProjects" class="nav-link block rounded-full px-4 py-2.5">Projetos</a></li>
+              <li><a href="#contato" data-nav data-i18n="navContact" class="nav-link block rounded-full px-4 py-2.5">Contato</a></li>
+            </ul>
+
+            <!-- Faixa decorativa: código de barras, asterisco e paralelogramos -->
+            <div aria-hidden="true" class="mt-6 flex items-center gap-4 border-y-2 border-ink py-2">
+              <div class="barcode h-8 flex-1"></div>
+              <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9" />
+              </svg>
+              <div class="flex shrink-0 gap-1.5">
+                <span class="h-5 w-4 -skew-x-[30deg] bg-ink"></span>
+                <span class="h-5 w-4 -skew-x-[30deg] bg-ink"></span>
+              </div>
+            </div>
+
+            <!-- Indicador de progresso decorativo -->
+            <div aria-hidden="true" class="mt-4 flex gap-2">
+              <span class="h-2 w-14 rounded-full bg-ink"></span>
+              <span class="h-2 w-14 rounded-full border-2 border-ink"></span>
+              <span class="h-2 w-14 rounded-full border-2 border-ink"></span>
+            </div>
+
+            <!-- Apresentação -->
+            <div class="mt-8">
+              <p class="text-base font-medium sm:text-lg" data-i18n="hello">Olá, eu sou</p>
+              <h1 class="mt-1 font-head text-4xl font-extrabold uppercase leading-none tracking-tight sm:text-5xl">
+                Gianluca Antoniacci
+              </h1>
+              <p class="mt-3 text-base font-medium sm:text-lg">
+                <strong class="font-extrabold" data-i18n="role">Estudante de Engenharia de Software</strong>
+              </p>
+            </div>
+
+            <!-- Linha inferior: idioma (globo), chave de tema e monograma -->
+            <div class="mt-8 flex flex-wrap items-center gap-4 md:mt-auto md:pt-10">
+
+              <!-- SELETOR DE IDIOMA -->
+              <div role="group" aria-label="Idioma" data-i18n-attr="aria-label:langLabel" class="flex items-center gap-2">
+                <svg aria-hidden="true" viewBox="0 0 48 48" class="h-11 w-11 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="24" cy="24" r="21" />
+                  <ellipse cx="24" cy="24" rx="9" ry="21" />
+                  <path d="M3 24h42M6 13h36M6 35h36" />
+                </svg>
+                <div class="flex rounded-full border-[2.5px] border-ink p-1 text-xs font-extrabold">
+                  <button type="button" data-lang="pt" aria-pressed="true" aria-label="Português" lang="pt-BR" class="lang-btn rounded-full px-2.5 py-1.5 transition-colors duration-200">PT</button>
+                  <button type="button" data-lang="en" aria-pressed="false" aria-label="English" lang="en" class="lang-btn rounded-full px-2.5 py-1.5 transition-colors duration-200">EN</button>
+                  <button type="button" data-lang="es" aria-pressed="false" aria-label="Español" lang="es" class="lang-btn rounded-full px-2.5 py-1.5 transition-colors duration-200">ES</button>
+                </div>
+              </div>
+
+              <!-- CHAVE DE TEMA (ligada = escuro) -->
+              <button id="theme-toggle" type="button" role="switch" aria-checked="true" aria-label="Tema escuro" data-i18n-attr="aria-label:themeLabel"
+                      class="theme-switch flex h-12 w-24 shrink-0 items-center rounded-full border-[2.5px] border-ink p-1.5 transition-colors duration-200 hover:bg-ink/5">
+                <span aria-hidden="true" class="knob grid h-8 w-8 place-items-center rounded-full bg-ink text-paper">
+                  <svg class="icon-moon h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" />
+                  </svg>
+                  <svg class="icon-sun h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />
+                    <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+                  </svg>
+                </span>
+              </button>
+
+              <div aria-hidden="true" class="flex items-center gap-2">
+                <span class="grid h-12 w-12 place-items-center border-[2.5px] border-ink font-display text-xl">GA</span>
+                <span class="font-head text-sm font-bold uppercase leading-tight" data-i18n-html="monogram">Eng. de<br />Software</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna gráfica (substitui a foto da referência) -->
+          <div class="relative md:col-span-5">
+            <div aria-hidden="true" class="relative h-72 overflow-hidden rounded-[1.5rem] bg-ink sm:h-80 md:h-full md:min-h-[26rem]">
+              <svg viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" class="absolute inset-0 h-full w-full">
+                <defs>
+                  <radialGradient id="glow" cx="55%" cy="35%" r="70%">
+                    <stop offset="0" stop-color="#5c5954" />
+                    <stop offset="1" stop-color="#0B0B0B" />
+                  </radialGradient>
+                  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="16" />
+                  </filter>
+                  <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1.2" fill="#E8E5E0" opacity=".18" />
+                  </pattern>
+                </defs>
+                <rect width="320" height="400" fill="url(#glow)" />
+                <rect width="320" height="400" fill="url(#dots)" />
+                <ellipse cx="170" cy="190" rx="95" ry="150" fill="#111" filter="url(#blur)" />
+                <g fill="none" stroke="#E8E5E0">
+                  <circle cx="165" cy="165" r="45" opacity=".35" />
+                  <circle cx="165" cy="165" r="80" opacity=".22" stroke-dasharray="4 6" />
+                  <circle cx="165" cy="165" r="118" opacity=".15" />
+                  <circle cx="165" cy="165" r="156" opacity=".1" stroke-dasharray="2 8" />
+                  <path d="M165 0v400M0 165h320" opacity=".12" />
+                </g>
+                <g fill="none" stroke="#E8E5E0" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M128 130 95 165l33 35" />
+                  <path d="M202 130l33 35-33 35" />
+                  <path d="M180 118 150 212" opacity=".85" />
+                </g>
+                <g fill="#E8E5E0">
+                  <rect x="24" y="24" width="10" height="10" />
+                  <rect x="286" y="24" width="10" height="10" opacity=".5" />
+                  <rect x="24" y="366" width="10" height="10" opacity=".5" />
+                </g>
+              </svg>
+            </div>
+            <p aria-hidden="true" data-i18n-html="heroWord"
+               class="hero-word pointer-events-none absolute bottom-4 left-4 z-10 font-display uppercase leading-[.95] text-[clamp(4rem,15vw,6.5rem)] md:-bottom-10 md:-left-10 lg:text-[7.5rem]">
+              Port<br />fólio
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HABILIDADES DE SOFTWARE ============ -->
+      <section id="habilidades" aria-labelledby="titulo-habilidades" class="mt-6 scroll-mt-6 md:mt-8">
+        <div class="grid gap-6 md:grid-cols-12">
+
+          <!-- Título em pílula com ícone -->
+          <div class="flex items-center md:col-span-7">
+            <span aria-hidden="true" class="relative z-10 grid h-16 w-16 shrink-0 place-items-center rounded-full border-4 border-ink bg-gradient-to-br from-bone via-ash to-stone text-ink shadow-[inset_0_2px_6px_rgba(255,255,255,.6)] sm:h-20 sm:w-20">
+              <svg viewBox="0 0 24 24" class="h-8 w-8 sm:h-9 sm:w-9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m8 7-5 5 5 5M16 7l5 5-5 5" />
+              </svg>
+            </span>
+            <div class="-ml-6 flex-1 rounded-full bg-paper py-3 pl-10 pr-6 text-ink transition-colors duration-300 sm:py-4">
+              <h2 id="titulo-habilidades" data-i18n="skillsTitle" class="font-head text-2xl font-extrabold uppercase tracking-wide sm:text-4xl">
+                Habilidades de Software
+              </h2>
+            </div>
+          </div>
+
+          <!-- Detalhe decorativo à direita (alinhado às estrelas da referência) -->
+          <div aria-hidden="true" class="hidden items-center justify-center gap-2 md:col-span-5 md:flex md:pt-10">
+            <span class="h-4 w-4 rotate-45 bg-contrast"></span>
+            <span class="h-4 w-4 rotate-45 bg-contrast"></span>
+            <span class="h-4 w-4 rotate-45 bg-contrast"></span>
+            <span class="h-4 w-4 rotate-45 bg-contrast"></span>
+            <span class="h-4 w-4 rotate-45 border-2 border-contrast"></span>
+          </div>
+
+          <!-- Cartão de habilidades -->
+          <div class="notch relative rounded-[2rem] bg-paper p-6 text-ink transition-colors duration-300 sm:p-8 md:col-span-7">
+            <ul class="grid grid-cols-3 gap-x-3 gap-y-6 sm:grid-cols-5">
+              <li class="flex flex-col items-center gap-2 text-center">
+                <span aria-hidden="true" class="grid h-16 w-16 place-items-center rounded-full border-[3px] border-ink bg-gradient-to-br from-bone to-ash font-head text-xl font-extrabold transition-transform duration-200 hover:-translate-y-1 sm:h-20 sm:w-20 sm:text-2xl">&lt;/&gt;</span>
+                <span class="text-xs font-bold uppercase leading-tight sm:text-sm">HTML/CSS</span>
+              </li>
+              <li class="flex flex-col items-center gap-2 text-center">
+                <span aria-hidden="true" class="grid h-16 w-16 place-items-center rounded-full border-[3px] border-ink bg-ink text-bone transition-transform duration-200 hover:-translate-y-1 sm:h-20 sm:w-20">
+                  <svg viewBox="0 0 24 24" class="h-9 w-9 sm:h-11 sm:w-11" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <ellipse cx="12" cy="12" rx="10" ry="4" />
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+                    <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+                    <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none" />
+                  </svg>
+                </span>
+                <span class="text-xs font-bold uppercase leading-tight sm:text-sm">React</span>
+              </li>
+              <li class="flex flex-col items-center gap-2 text-center">
+                <span aria-hidden="true" class="grid h-16 w-16 place-items-center rounded-full border-[3px] border-ink bg-bone font-display text-2xl transition-transform duration-200 hover:-translate-y-1 sm:h-20 sm:w-20 sm:text-3xl">JS</span>
+                <span class="text-xs font-bold uppercase leading-tight sm:text-sm">JavaScript</span>
+              </li>
+              <li class="flex flex-col items-center gap-2 text-center">
+                <span aria-hidden="true" class="grid h-16 w-16 place-items-center rounded-full border-[3px] border-ink bg-gradient-to-br from-ash to-stone font-display text-2xl text-bone transition-transform duration-200 hover:-translate-y-1 sm:h-20 sm:w-20 sm:text-3xl">Py</span>
+                <span class="text-xs font-bold uppercase leading-tight sm:text-sm">Python</span>
+              </li>
+              <li class="flex flex-col items-center gap-2 text-center">
+                <span aria-hidden="true" class="grid h-16 w-16 place-items-center rounded-full border-[3px] border-ink bg-ink font-display text-2xl text-bone transition-transform duration-200 hover:-translate-y-1 sm:h-20 sm:w-20 sm:text-3xl">C++</span>
+                <span class="text-xs font-bold uppercase leading-tight sm:text-sm" data-i18n="skillCpp">C++ para Arduino/IoT</span>
+              </li>
+            </ul>
+
+            <!-- Pontos de conexão decorativos -->
+            <div aria-hidden="true" class="absolute -bottom-3 left-1/3 hidden gap-2 md:flex">
+              <span class="h-6 w-6 rounded-full bg-page transition-colors duration-300"></span>
+              <span class="h-6 w-6 rounded-full bg-page transition-colors duration-300"></span>
+              <span class="h-6 w-6 rounded-full bg-page transition-colors duration-300"></span>
+            </div>
+          </div>
+
+          <!-- Cartão lateral tracejado -->
+          <div aria-hidden="true" class="notch grid place-items-center rounded-[2rem] bg-paper p-6 text-ink transition-colors duration-300 md:col-span-5">
+            <p data-i18n-html="sideCard" class="rounded-sm border-2 border-dashed border-ink px-5 py-3 text-center text-sm font-extrabold uppercase tracking-wide">
+              Linguagens e<br />frameworks
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TECNOLOGIAS QUE UTILIZO ============ -->
+      <section id="tecnologias" aria-labelledby="titulo-tecnologias" class="mt-6 scroll-mt-6">
+        <div class="grid gap-6 md:grid-cols-12">
+
+          <div class="rounded-[2rem] bg-paper p-6 text-ink transition-colors duration-300 sm:p-8 md:col-span-7">
+            <h2 id="titulo-tecnologias" data-i18n="techTitle" class="font-head text-3xl font-extrabold uppercase tracking-wide sm:text-4xl">
+              Tecnologias que utilizo :
+            </h2>
+            <ul class="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">01</span><span class="font-bold">Visual Studio Code</span></li>
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">02</span><span class="font-bold">Arduino IDE</span></li>
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">03</span><span class="font-bold">Figma</span></li>
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">04</span><span class="font-bold">Canva</span></li>
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">05</span><span class="font-bold">Blender</span></li>
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">06</span><span class="font-bold">Autodesk Fusion 360</span></li>
+              <li class="flex items-center gap-3"><span aria-hidden="true" class="h-3 w-3 shrink-0 rounded-full bg-ink"></span><span aria-hidden="true" class="font-display text-2xl leading-none">07</span><span class="font-bold">Linux</span></li>
+            </ul>
+          </div>
+
+          <!-- Cartão lateral com QR Code que leva ao e-mail -->
+          <div class="relative rounded-[2rem] bg-paper p-6 text-ink transition-colors duration-300 md:col-span-5">
+            <div aria-hidden="true" class="absolute -top-3 right-10 hidden gap-2 md:flex">
+              <span class="h-6 w-6 rounded-full bg-page transition-colors duration-300"></span>
+              <span class="h-6 w-6 rounded-full bg-page transition-colors duration-300"></span>
+              <span class="h-6 w-6 rounded-full bg-page transition-colors duration-300"></span>
+            </div>
+            <!-- QR CODE: imagem em src/img/qrcode.png; o link é o mesmo do botão de e-mail do rodapé -->
+            <a href="https://mail.google.com/mail/?view=cm&to=gianluca.antonicci@gmail.com&body=Ol%C3%A1!" target="_blank" rel="noopener noreferrer"
+               aria-label="Enviar e-mail para Gianluca Antoniacci" data-i18n-attr="aria-label:emailLabel"
+               class="group mx-auto flex h-full max-w-xs flex-col items-center justify-center gap-4 rounded-2xl bg-graphite p-6 text-bone transition-transform duration-200 hover:-translate-y-1">
+              <img src="src/img/qrcode.png" alt="QR Code para enviar e-mail" data-i18n-attr="alt:qrAlt"
+                   width="410" height="410" loading="lazy"
+                   class="h-40 w-40 rounded-xl bg-white p-1.5 transition-transform duration-200 group-hover:scale-[1.03]" />
+              <span class="flex w-full items-center justify-center gap-2 border-t border-ash/40 pt-3 text-sm font-bold uppercase tracking-wider">
+                <span data-i18n="qrCaption">Enviar e-mail</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MEUS PROJETOS ============
+           Os textos dos cards (título, descrição, alt e rótulo do link) ficam
+           em src/script.js, nas chaves p1*, p2* e p3* de cada idioma.
+           O texto em português abaixo é usado caso o JavaScript não carregue. -->
+      <section id="projetos" aria-labelledby="titulo-projetos" class="mt-6 scroll-mt-6 md:mt-10">
+        <div class="grid gap-6 md:grid-cols-[auto_1fr]">
+
+          <!-- Título vertical em pílula (horizontal no mobile) -->
+          <div class="flex items-center gap-3 md:flex-col md:gap-4">
+            <span aria-hidden="true" class="h-8 w-8 shrink-0 rounded-full bg-paper transition-colors duration-300"></span>
+            <div class="flex-1 rounded-full bg-paper px-6 py-3 text-ink transition-colors duration-300 md:flex md:flex-1 md:items-center md:px-3 md:py-8">
+              <h2 id="titulo-projetos" data-i18n="projectsTitle" class="vertical-title font-head text-3xl font-extrabold uppercase tracking-wide sm:text-4xl">
+                Meus Projetos :
+              </h2>
+            </div>
+          </div>
+
+          <!-- Grade de cards -->
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            <!-- ===== PROJETO 1 (editar a partir daqui) ===== -->
+            <article class="card-hover group flex flex-col rounded-[1.25rem] border-2 border-ash/60 bg-graphite p-3 text-bone transition duration-300 hover:-translate-y-1 hover:border-bone">
+              <!-- IMAGEM: captura em src/img/ (troque o src para usar outra imagem; alt em src/script.js, chave p1Alt) -->
+              <div class="aspect-video overflow-hidden rounded-xl bg-ash">
+                <img src="src/img/bootstrap.png"
+                     alt="Página inicial do projeto Grão Nobre" data-i18n-attr="alt:p1Alt"
+                     loading="lazy" width="1280" height="720"
+                     class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0" />
+              </div>
+              <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+                <!-- TÍTULO: edite em src/script.js (chave p1Title) -->
+                <h3 data-i18n="p1Title" class="font-head text-2xl font-extrabold uppercase tracking-wide">Grão Nobre</h3>
+                <!-- DESCRIÇÃO: edite em src/script.js (chave p1Desc) -->
+                <p data-i18n="p1Desc" class="mt-2 text-sm leading-relaxed text-ash">Landing page de uma marca fictícia de cafés especiais, feita com Bootstrap 5: carrossel de depoimentos, FAQ em acordeão e pedido em modal.</p>
+                <!-- LINK: endereço da página do projeto -->
+                <a href="src/pages/bootstrap.html" target="_blank" rel="noopener noreferrer" aria-label="Ver o projeto Grão Nobre (abre em nova aba)" data-i18n-attr="aria-label:p1Link"
+                   class="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-bone px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-ink transition-colors duration-200 hover:bg-white">
+                  <span data-i18n="viewProject">Ver projeto</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- ===== PROJETO 2 (editar a partir daqui) ===== -->
+            <article class="card-hover group flex flex-col rounded-[1.25rem] border-2 border-ash/60 bg-graphite p-3 text-bone transition duration-300 hover:-translate-y-1 hover:border-bone">
+              <!-- IMAGEM: captura em src/img/ (troque o src para usar outra imagem; alt em src/script.js, chave p2Alt) -->
+              <div class="aspect-video overflow-hidden rounded-xl bg-ash">
+                <img src="src/img/tailwind1.png"
+                     alt="Página inicial do projeto NovaCore" data-i18n-attr="alt:p2Alt"
+                     loading="lazy" width="1280" height="720"
+                     class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0" />
+              </div>
+              <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+                <!-- TÍTULO: edite em src/script.js (chave p2Title) -->
+                <h3 data-i18n="p2Title" class="font-head text-2xl font-extrabold uppercase tracking-wide">NovaCore</h3>
+                <!-- DESCRIÇÃO: edite em src/script.js (chave p2Desc) -->
+                <p data-i18n="p2Desc" class="mt-2 text-sm leading-relaxed text-ash">Site institucional de uma empresa de tecnologia, feito com Tailwind CSS: serviços, sobre nós, depoimentos e formulário de contato.</p>
+                <!-- LINK: endereço da página do projeto -->
+                <a href="src/pages/tailwind1.html" target="_blank" rel="noopener noreferrer" aria-label="Ver o projeto NovaCore (abre em nova aba)" data-i18n-attr="aria-label:p2Link"
+                   class="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-bone px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-ink transition-colors duration-200 hover:bg-white">
+                  <span data-i18n="viewProject">Ver projeto</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- ===== PROJETO 3 (editar a partir daqui) ===== -->
+            <article class="card-hover group flex flex-col rounded-[1.25rem] border-2 border-ash/60 bg-graphite p-3 text-bone transition duration-300 hover:-translate-y-1 hover:border-bone sm:col-span-2 lg:col-span-1">
+              <!-- IMAGEM: captura em src/img/ (troque o src para usar outra imagem; alt em src/script.js, chave p3Alt) -->
+              <div class="aspect-video overflow-hidden rounded-xl bg-ash">
+                <img src="src/img/tailwind2.png"
+                     alt="Página inicial do projeto Fio &amp; Prensa" data-i18n-attr="alt:p3Alt"
+                     loading="lazy" width="1280" height="720"
+                     class="h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0" />
+              </div>
+              <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+                <!-- TÍTULO: edite em src/script.js (chave p3Title) -->
+                <h3 data-i18n="p3Title" class="font-head text-2xl font-extrabold uppercase tracking-wide">Fio &amp; Prensa</h3>
+                <!-- DESCRIÇÃO: edite em src/script.js (chave p3Desc) -->
+                <p data-i18n="p3Desc" class="mt-2 text-sm leading-relaxed text-ash">Site de um ateliê de encadernação artesanal, feito com Tailwind CSS: etapas do ofício, peças recentes e informações para visita.</p>
+                <!-- LINK: endereço da página do projeto -->
+                <a href="src/pages/tailwind2.html" target="_blank" rel="noopener noreferrer" aria-label="Ver o projeto Fio &amp; Prensa (abre em nova aba)" data-i18n-attr="aria-label:p3Link"
+                   class="mt-4 inline-flex w-fit items-center gap-2 rounded-full bg-bone px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-ink transition-colors duration-200 hover:bg-white">
+                  <span data-i18n="viewProject">Ver projeto</span>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ CONTATO / RODAPÉ ============ -->
+    <footer id="contato" aria-labelledby="titulo-contato" class="mt-10 scroll-mt-6">
+      <div class="notch rounded-[2rem] bg-paper p-6 text-ink transition-colors duration-300 sm:p-8">
+        <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <h2 id="titulo-contato" data-i18n="contactTitle" class="font-head text-3xl font-extrabold uppercase tracking-wide sm:text-4xl">Contato :</h2>
+
+          <!-- LINKS DE CONTATO: troque os href="#" pelos seus endereços -->
+          <ul class="flex flex-wrap gap-3">
+            <li>
+              <a href="https://github.com/GianAntonicci" aria-label="GitHub de Gianluca Antoniacci" data-i18n-attr="aria-label:githubLabel"
+                 class="inline-flex items-center gap-2 rounded-full border-[2.5px] border-ink px-4 py-2.5 text-sm font-extrabold uppercase tracking-wide transition-colors duration-200 hover:bg-ink hover:text-paper">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/gianluca-antonicci-b178a83b6/" aria-label="LinkedIn de Gianluca Antoniacci" data-i18n-attr="aria-label:linkedinLabel"
+                 class="inline-flex items-center gap-2 rounded-full border-[2.5px] border-ink px-4 py-2.5 text-sm font-extrabold uppercase tracking-wide transition-colors duration-200 hover:bg-ink hover:text-paper">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor">
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z" />
+                </svg>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://mail.google.com/mail/?view=cm&to=gianluca.antonicci@gmail.com&body=Ol%C3%A1!" target="_blank" rel="noopener" aria-label="Enviar e-mail para Gianluca Antoniacci" data-i18n-attr="aria-label:emailLabel"
+                 class="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-extrabold uppercase tracking-wide text-paper transition-transform duration-200 hover:-translate-y-0.5">
+                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3.5 6.5 8.5 7 8.5-7" />
+                </svg>
+                <span data-i18n="email">E-mail</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Assinatura com código de barras decorativo -->
+        <div class="mt-8 flex flex-col gap-3 border-t-2 border-ink pt-4 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm font-semibold">Gianluca Antoniacci &middot; <span data-i18n="role">Estudante de Engenharia de Software</span></p>
+          <div aria-hidden="true" class="barcode h-6 w-40"></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
